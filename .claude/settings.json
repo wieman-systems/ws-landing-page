@@ -1,0 +1,31 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash .claude/hooks/eslint-fix.sh",
+            "timeout": 60,
+            "statusMessage": "ESLint --fix on edited file"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash .claude/hooks/typecheck.sh",
+            "timeout": 180,
+            "statusMessage": "tsc --noEmit typecheck"
+          }
+        ]
+      }
+    ]
+  }
+}

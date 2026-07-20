@@ -9,8 +9,6 @@ import CaliperGauge from "./faq/CaliperGauge";
 const SECTION_MASK =
   "linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent)";
 
-// DRAFT answers — verify these against how you actually operate before launch
-// (especially data handling and pricing).
 const faqs = [
   {
     q: "What kind of work can you automate?",

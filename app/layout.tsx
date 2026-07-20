@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Wieman Systems — Custom AI Systems",
     description:
       "Custom AI systems, automation, and intelligent dashboards for businesses of all kinds.",
-    url: "https://wiemansystems.com",
+    url: "https://www.wiemansystems.com",
     siteName: "Wieman Systems",
     type: "website",
   },
@@ -39,7 +39,23 @@ export const metadata: Metadata = {
     title: "Wieman Systems — Custom AI Systems",
     description: "Custom AI systems that do your team's busywork for you.",
   },
-  metadataBase: new URL("https://wiemansystems.com"),
+  // Serve on www (apex 308-redirects to www); keep canonical + metadataBase on the
+  // same host so search/social don't split signal between apex and www.
+  alternates: { canonical: "https://www.wiemansystems.com" },
+  metadataBase: new URL("https://www.wiemansystems.com"),
+};
+
+// Organization structured data for richer search results (house trust baseline).
+const ORG_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Wieman Systems",
+  url: "https://www.wiemansystems.com",
+  email: "caleb@wiemansystems.com",
+  logo: "https://www.wiemansystems.com/icon.png",
+  founder: { "@type": "Person", name: "Caleb Wieman" },
+  description:
+    "Wieman Systems designs, builds, and runs custom AI systems, automation, and intelligent dashboards.",
 };
 
 export const viewport: Viewport = {
@@ -60,6 +76,10 @@ export default function RootLayout({
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH_THEME }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}
+        />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

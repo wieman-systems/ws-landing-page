@@ -66,7 +66,7 @@ const PRINCIPLES = [
 const WORK = [
   {
     t: "Shipping automation",
-    d: "Plasma Bionics — turned a manual fulfillment process into a system that prepares and ships orders on its own.",
+    d: "Rebuilt a manual fulfillment process into a system that prepares and ships orders on its own.",
   },
   {
     t: "Productivity agents",

@@ -18,8 +18,8 @@ import {
 } from "simple-icons";
 import Reveal from "./Reveal";
 
-// DRAFT — swap/extend with the tools you actually build on. (Slack, OpenAI and
-// Salesforce asked icon sets to drop their marks, so they're intentionally out.)
+// Representative tools we build on. (Slack, OpenAI and Salesforce asked icon sets
+// to drop their marks, so they're intentionally out.)
 const TOOLS: { name: string; icon: SimpleIcon }[] = [
   { name: "Notion", icon: siNotion },
   { name: "Airtable", icon: siAirtable },

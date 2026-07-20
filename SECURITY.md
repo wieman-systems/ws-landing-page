@@ -24,5 +24,5 @@ A machine-readable contact is published at
 
 ## Scope
 
-This policy covers wiemansystems.com. The RunIQ application has its own security
-policy and contact at https://runiq-azure.vercel.app/.well-known/security.txt.
+This policy covers www.wiemansystems.com. Other Wieman Systems properties on their
+own subdomains carry their own security.txt at that subdomain.

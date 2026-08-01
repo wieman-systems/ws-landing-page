@@ -16,15 +16,35 @@ const escapeHtml = (s: string) =>
 // open relay: reject genuine cross-site POSTs and throttle floods before we ever
 // call Resend (protects the inbox and the shared daily/monthly send quota).
 const ALLOWED_ORIGINS = ["https://wiemansystems.com", "https://www.wiemansystems.com"];
+// THIS project's own preview/branch deploys. Vercel preview URLs for the Wieman
+// Systems team end in the team slug — ws-landing-page-<hash>-wieman-systems
+// .vercel.app — so we require that suffix. The previous pattern here was
+// /^https:\/\/website-[a-z0-9-]+\.vercel\.app$/, which was both stale (this
+// project was renamed from "website" to "ws-landing-page", so it matched no
+// current preview) and far too wide: *.vercel.app subdomains are first-come and
+// globally unique, so anyone could register a project named "website-anything"
+// and have their page POST here cross-origin on our Resend quota.
+const PREVIEW_ORIGIN = /^https:\/\/ws-landing-page(-[a-z0-9-]+)?-wieman-systems\.vercel\.app$/;
 function originAllowed(o: string | null): boolean {
   // Require an Origin on the allowlist: our own domains or THIS project's own
   // preview deploys. The form always sends a same-origin Origin on POST; a
   // missing or third-party Origin (a bare curl relay, or an attacker page on
   // some other *.vercel.app) is rejected before we ever call Resend.
-  return !!o && (ALLOWED_ORIGINS.includes(o) || /^https:\/\/website-[a-z0-9-]+\.vercel\.app$/.test(o));
+  return !!o && (ALLOWED_ORIGINS.includes(o) || PREVIEW_ORIGIN.test(o));
 }
 
-// Best-effort in-memory rate limit (per warm instance): 5 sends / 10 min / IP.
+// Best-effort in-memory rate limit: 5 sends / 10 min / IP.
+//
+// KNOWN LIMITATION — this counter lives in the module scope of ONE warm serverless
+// instance. Vercel runs many concurrently and recycles cold ones, so the effective
+// ceiling is 5 sends per 10 min per IP *per instance*, not per IP. Parallel
+// requests, or simply waiting out a cold start, each get a fresh budget. Treat it
+// as friction against casual abuse, NOT as a spend control on the Resend quota.
+//
+// Fixing it properly needs a request-shared store (Vercel KV / Upstash Redis /
+// Supabase). This project has none — its only env vars are RESEND_API_KEY and
+// CONTACT_FROM — so adding one is a new dependency + cost decision, deliberately
+// not taken here. Residual risk is documented in SECURITY.md ("Known limitations").
 const HITS = new Map<string, number[]>();
 function rateLimited(ip: string): boolean {
   const now = Date.now();

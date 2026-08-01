@@ -27,6 +27,20 @@ A machine-readable contact is published at
 This policy covers www.wiemansystems.com. Other Wieman Systems properties on their
 own subdomains carry their own security.txt at that subdomain.
 
+## Canonical host
+
+`www.wiemansystems.com` is the canonical origin. The apex redirects to it at the
+Vercel domain level, and the bare auto-generated alias
+`website-eight-lyart-23.vercel.app` — a leftover from when this project was named
+`website` — is 308'd to it by a host-scoped rule in [`vercel.json`](vercel.json).
+It previously served a full duplicate of the production site, which is both an
+SEO problem and, since the contact endpoint no longer accepts that Origin, a copy
+of the site with a form that 403s.
+
+Preview and branch deploys (`ws-landing-page-*-wieman-systems.vercel.app`) are
+intentionally NOT redirected, so they stay testable, and `app/api/contact/route.ts`
+accepts their Origin.
+
 ## Known limitations
 
 **The contact-form rate limiter is not a real spend control.**

@@ -5,13 +5,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import MagneticButton from "./MagneticButton";
+import MagneticLink from "./MagneticLink";
 import ThemeToggle from "./ThemeToggle";
 
 interface HeaderProps {
   onBook: () => void;
+  /**
+   * Optional link CTA that replaces the default "Book a call" button
+   * (e.g. the Wieman OS trial). `shortLabel` swaps in below 760px so the
+   * 74px bar never wraps. Existing pages omit this and are unchanged.
+   */
+  cta?: { label: string; shortLabel?: string; href: string };
 }
 
-export default function Header({ onBook }: HeaderProps) {
+export default function Header({ onBook, cta }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -101,18 +108,37 @@ export default function Header({ onBook }: HeaderProps) {
           <Link
             href="/about"
             data-cursor
-            className={`ws-nav${pathname === "/about" ? " is-active" : ""}`}
+            // With a long trial CTA in the bar, About yields on phones so the
+            // 74px height contract holds (the footer still links everywhere).
+            className={`ws-nav${pathname === "/about" ? " is-active" : ""}${cta ? " hide-mobile" : ""}`}
           >
             About
           </Link>
           <ThemeToggle />
-          <MagneticButton
-            variant="solid-dark"
-            onClick={onBook}
-            style={{ padding: "11px 22px", fontSize: 12, letterSpacing: "0.1em" }}
-          >
-            Book a call
-          </MagneticButton>
+          {cta ? (
+            <MagneticLink
+              variant="solid-dark"
+              href={cta.href}
+              style={{ padding: "11px 22px", fontSize: 12, letterSpacing: "0.1em" }}
+            >
+              {cta.shortLabel ? (
+                <>
+                  <span className="hide-mobile">{cta.label}</span>
+                  <span className="show-mobile">{cta.shortLabel}</span>
+                </>
+              ) : (
+                cta.label
+              )}
+            </MagneticLink>
+          ) : (
+            <MagneticButton
+              variant="solid-dark"
+              onClick={onBook}
+              style={{ padding: "11px 22px", fontSize: 12, letterSpacing: "0.1em" }}
+            >
+              Book a call
+            </MagneticButton>
+          )}
         </nav>
       </div>
     </header>

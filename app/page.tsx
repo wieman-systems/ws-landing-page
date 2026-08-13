@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import OsBand from "@/components/OsBand";
 import WhatWeDo from "@/components/WhatWeDo";
 import IntegrationsStrip from "@/components/IntegrationsStrip";
 import HowWeWork from "@/components/HowWeWork";
@@ -22,6 +23,7 @@ export default function Home() {
       <Header onBook={onBook} />
       <main>
         <Hero onBook={onBook} />
+        <OsBand />
         <WhatWeDo />
         <IntegrationsStrip />
         <HowWeWork />

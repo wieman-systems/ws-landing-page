@@ -13,10 +13,7 @@ import OsCustomize from "@/components/wieman-os/OsCustomize";
 import OsTrial from "@/components/wieman-os/OsTrial";
 import OsPricing from "@/components/wieman-os/OsPricing";
 import OsFaq from "@/components/wieman-os/OsFaq";
-
-// The single source of truth for the trial funnel. Always a plain link-out —
-// never an iframe or a cross-origin fetch; the site's CSP stays strict.
-const TRIAL_URL = "https://try.wiemansystems.com";
+import { TRIAL_URL } from "@/lib/product";
 
 export default function WiemanOs() {
   const [modalOpen, setModalOpen] = useState(false);

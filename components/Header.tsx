@@ -106,6 +106,15 @@ export default function Header({ onBook, cta }: HeaderProps) {
         {/* Nav + CTA */}
         <nav style={{ display: "flex", alignItems: "center", gap: "clamp(16px, 2.4vw, 30px)" }}>
           <Link
+            href="/wieman-os"
+            data-cursor
+            // The 74px bar is at capacity on phones, so this link is
+            // desktop-only; mobile reaches the product via the homepage band.
+            className={`ws-nav hide-mobile${pathname?.startsWith("/wieman-os") ? " is-active" : ""}`}
+          >
+            Wieman OS
+          </Link>
+          <Link
             href="/about"
             data-cursor
             // With a long trial CTA in the bar, About yields on phones so the

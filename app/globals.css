@@ -224,6 +224,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   }
   .stop-grid { grid-template-columns: 1fr; }
   .hide-mobile { display: none !important; }
+  .show-mobile { display: inline !important; }
 
   /* Hero headline: let the two phrases wrap instead of clipping, and give
      it a confident mobile size that still fits the narrowest phones. */
@@ -426,6 +427,146 @@ html.ws-cursor-on .field input, html.ws-cursor-on .field textarea { cursor: text
   .ws-theme-toggle.is-ready .ws-theme-toggle__glyph {
     transition: transform .5s cubic-bezier(.65, .05, .36, 1);
   }
+}
+
+/* ── Wieman OS product page (/wieman-os) ───────────────────── */
+
+/* Counterpart to .hide-mobile: revealed only below 760px. */
+.show-mobile { display: none; }
+
+/* Problem → shift: tab graveyard beside the one-console shot. */
+.os-shift-grid { display: grid; grid-template-columns: 1fr; row-gap: clamp(44px, 7vh, 72px); }
+@media (min-width: 880px) {
+  .os-shift-grid {
+    grid-template-columns: 0.88fr 1.12fr;
+    column-gap: clamp(36px, 4.5vw, 76px);
+    align-items: center;
+  }
+}
+
+/* Product frames: hard 1px border + the house zero-blur offset shadow.
+   Margin reserves the shadow's footprint so nothing clips or overlaps. */
+.os-frame {
+  position: relative;
+  border: 1px solid var(--fg);
+  background: var(--surface);
+  box-shadow: 8px 8px 0 var(--fg);
+  overflow: hidden;
+  margin: 0 8px 8px 0;
+}
+.os-frame--chip { box-shadow: 6px 6px 0 var(--fg); margin: 0 6px 6px 0; }
+/* CSS-cropped capture inside a frame (portrait sources, no stretching). */
+.os-frame > img,
+.os-frame > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Module tour: responsive phone-tile grid. */
+.os-tour-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(36px, 5vh, 56px) clamp(20px, 2.6vw, 36px);
+}
+@media (min-width: 1080px) { .os-tour-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 560px) { .os-tour-grid { grid-template-columns: 1fr; } }
+
+/* The Intelligence: copy + tall phone. */
+.os-intel-grid { display: grid; grid-template-columns: 1fr; row-gap: clamp(44px, 7vh, 72px); }
+@media (min-width: 880px) {
+  .os-intel-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+    column-gap: clamp(40px, 5vw, 88px);
+    align-items: start;
+  }
+}
+.os-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px dashed rgba(var(--ink-inverse-rgb), 0.44);
+  padding: 7px 12px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(var(--ink-inverse-rgb), 0.78);
+  white-space: nowrap;
+}
+
+/* Customization: module toggle board. */
+.os-toggle-grid { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 760px) {
+  .os-toggle-grid { grid-template-columns: 1fr 1fr; column-gap: clamp(32px, 5vw, 72px); }
+}
+.os-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 17px 0;
+  border-top: 1px solid var(--border-soft);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  text-align: left;
+  color: var(--fg);
+}
+.os-toggle-row:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.os-toggle-row[aria-checked="false"] .os-toggle-name { color: var(--text-muted); }
+.os-toggle-row[aria-checked="false"] .os-toggle-desc { opacity: 0.45; }
+.os-switch {
+  position: relative;
+  flex: none;
+  width: 40px;
+  height: 22px;
+  border: 1px solid var(--fg);
+  background: transparent;
+}
+.os-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  background: var(--fg);
+  transition: transform 140ms linear;
+}
+.os-toggle-row[aria-checked="true"] .os-switch { background: var(--fg); }
+.os-toggle-row[aria-checked="true"] .os-switch::after {
+  background: var(--bg);
+  transform: translateX(18px);
+}
+.os-toggle-row[aria-disabled="true"] { cursor: default; }
+
+/* Trial steps + pricing. */
+.os-price-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(28px, 4vh, 40px) clamp(22px, 2.6vw, 36px);
+  align-items: stretch;
+}
+@media (min-width: 880px) { .os-price-grid { grid-template-columns: repeat(3, 1fr); } }
+.os-price-card {
+  position: relative;
+  border: 1px solid var(--border-mid);
+  padding: clamp(26px, 3.4vh, 36px) clamp(22px, 2.4vw, 30px);
+  display: flex;
+  flex-direction: column;
+}
+.os-price-card--featured {
+  border-color: var(--fg);
+  box-shadow: 8px 8px 0 var(--fg);
+  margin: 0 8px 8px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .os-switch::after { transition: none; }
 }
 
 /* ── About page layout ─────────────────────────────────────── */

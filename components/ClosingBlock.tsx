@@ -6,15 +6,26 @@ import InteractiveBrandGrid from "./InteractiveBrandGrid";
 import BlueprintGrid from "./BlueprintGrid";
 import Plus from "./Plus";
 import MagneticButton from "./MagneticButton";
+import MagneticLink from "./MagneticLink";
 import ScrambleText from "./ScrambleText";
 
 const EMAIL = "caleb@wiemansystems.com";
 
 interface ClosingBlockProps {
   onBook: () => void;
+  /** Optional overrides for product pages. Defaults keep the house closing CTA. */
+  eyebrow?: string;
+  title?: string;
+  /** Link CTA that replaces the "Book a call" button; onBook then becomes a quiet secondary link. */
+  cta?: { label: string; href: string };
 }
 
-export default function ClosingBlock({ onBook }: ClosingBlockProps) {
+export default function ClosingBlock({
+  onBook,
+  eyebrow = "Start here",
+  title = "Find out what your team could stop doing by hand.",
+  cta,
+}: ClosingBlockProps) {
   const ctaRef = useRef<HTMLHeadingElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
   const mailRef = useRef<HTMLAnchorElement>(null);
@@ -84,7 +95,7 @@ export default function ClosingBlock({ onBook }: ClosingBlockProps) {
             }}
           >
             <Plus size={12} color="var(--fg-inverse)" opacity={0.55} />
-            <ScrambleText text="Start here" />
+            <ScrambleText text={eyebrow} />
           </div>
           <h2
             className="cta-h2"
@@ -96,16 +107,47 @@ export default function ClosingBlock({ onBook }: ClosingBlockProps) {
               color: "var(--fg-inverse)",
             }}
           >
-            Find out what your team could stop doing by hand.
+            {title}
           </h2>
-          <MagneticButton
-            variant="solid-light"
-            onClick={onBook}
-            style={{ padding: "15px 30px", letterSpacing: "0.05em" }}
-          >
-            Book a call
-            <span style={{ fontSize: 16, lineHeight: 1 }}>&rarr;</span>
-          </MagneticButton>
+          {cta ? (
+            <>
+              <MagneticLink
+                variant="solid-light"
+                href={cta.href}
+                style={{ padding: "15px 30px", letterSpacing: "0.05em" }}
+              >
+                {cta.label}
+                <span style={{ fontSize: 16, lineHeight: 1 }}>&rarr;</span>
+              </MagneticLink>
+              <button
+                onClick={onBook}
+                data-cursor
+                style={{
+                  marginTop: 22,
+                  background: "none",
+                  border: "none",
+                  fontFamily: "var(--font-mono), monospace",
+                  fontSize: 13,
+                  letterSpacing: "0.04em",
+                  color: "rgba(var(--ink-inverse-rgb), 0.72)",
+                  textDecoration: "underline",
+                  textUnderlineOffset: 4,
+                  padding: 4,
+                }}
+              >
+                or book a call
+              </button>
+            </>
+          ) : (
+            <MagneticButton
+              variant="solid-light"
+              onClick={onBook}
+              style={{ padding: "15px 30px", letterSpacing: "0.05em" }}
+            >
+              Book a call
+              <span style={{ fontSize: 16, lineHeight: 1 }}>&rarr;</span>
+            </MagneticButton>
+          )}
         </div>
 
         {/* spacer — grid rises through this */}

@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, SplitText, prefersReducedMotion } from "@/lib/motion";
 import InteractiveBrandGrid from "./InteractiveBrandGrid";
-import BlueprintGrid from "./BlueprintGrid";
 import MagneticButton from "./MagneticButton";
 
 interface HeroProps {
@@ -89,13 +88,6 @@ export default function Hero({ onBook }: HeroProps) {
           { ref: leadRef, padX: 14, padTop: 8, padBottom: 10 },
           { ref: heroBtnRef, padX: 10, padTop: 8, padBottom: 8 },
         ]}
-      />
-
-      {/* Subtle graph-paper overlay */}
-      <BlueprintGrid
-        opacity={0.04}
-        unit={52}
-        style={{ height: "46%", bottom: "auto" }}
       />
 
       {/* Pitch content */}

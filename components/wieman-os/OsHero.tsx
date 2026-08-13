@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import InteractiveBrandGrid from "../InteractiveBrandGrid";
-import BlueprintGrid from "../BlueprintGrid";
 import MagneticLink from "../MagneticLink";
 import ScrambleText from "../ScrambleText";
 import Plus from "../Plus";
@@ -54,7 +53,6 @@ export default function OsHero({ trialUrl, onBook }: OsHeroProps) {
           { ref: ctaRef, padX: 10, padTop: 8, padBottom: 8 },
         ]}
       />
-      <BlueprintGrid opacity={0.04} unit={52} style={{ height: "46%", bottom: "auto" }} />
 
       <div
         className="ws-wrap"

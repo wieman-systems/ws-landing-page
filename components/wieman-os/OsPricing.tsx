@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import SectionHead from "../SectionHead";
 import Reveal from "../Reveal";
 import ScrambleText from "../ScrambleText";
@@ -32,6 +33,7 @@ const TIERS = [
     setup: "$3,500",
     monthly: "$299",
     featured: true,
+    apply: true,
     features: [
       "Everything in Install",
       "One-on-one setup sessions on your data",
@@ -45,6 +47,7 @@ const TIERS = [
     tagline: "We run the whole install",
     setup: "$6,000",
     monthly: "$499",
+    apply: true,
     features: [
       "Everything in Guided",
       "Onboarding run end-to-end for you",
@@ -234,13 +237,39 @@ export default function OsPricing({ trialUrl }: OsPricingProps) {
                   </li>
                 ))}
               </ul>
-              <MagneticLink
-                variant={t.featured ? "solid-dark" : "outline-dark"}
-                href={trialUrl}
-                style={{ padding: "13px 24px", fontSize: 12, alignSelf: "flex-start" }}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: 14,
+                }}
               >
-                Start the free trial
-              </MagneticLink>
+                <MagneticLink
+                  variant={t.featured ? "solid-dark" : "outline-dark"}
+                  href={trialUrl}
+                  style={{ padding: "13px 24px", fontSize: 12 }}
+                >
+                  Start the free trial
+                </MagneticLink>
+                {/* Guided + Partner are installed with/for you → apply funnel. */}
+                {t.apply && (
+                  <Link
+                    href={`/wieman-os/apply?tier=${t.name.toLowerCase()}`}
+                    data-cursor
+                    style={{
+                      fontFamily: "var(--font-mono), monospace",
+                      fontSize: 12,
+                      letterSpacing: "0.04em",
+                      color: "rgba(var(--ink-rgb), 0.66)",
+                      textDecoration: "underline",
+                      textUnderlineOffset: 4,
+                    }}
+                  >
+                    or apply for this install &rarr;
+                  </Link>
+                )}
+              </div>
             </Reveal>
           ))}
         </div>

@@ -10,42 +10,44 @@ const SECTION_MASK =
   "linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent)";
 
 // PRICING PLACEHOLDER — Caleb confirms before go-live.
-// Structure is the studio's build-then-monthly model: one setup build,
-// then a subscription that covers hosting, monitoring, and the Intelligence.
+// Direction (2026-08-12): ~$2k install anchor, higher tiers sell the
+// one-on-one setup + tutorial time, on the studio's build-then-monthly model.
 const TIERS = [
   {
-    name: "Console",
-    tagline: "The console on your numbers",
-    setup: "$1,500",
-    monthly: "$250",
+    name: "Install",
+    tagline: "Wieman OS on your stack",
+    setup: "$2,000",
+    monthly: "$199",
     features: [
-      "Overview with the morning brief",
-      "Revenue, spending, todos, calendar",
-      "Your systems monitored daily",
+      "The full console, installed and configured",
+      "Revenue, spending, inbox, todos, calendar",
+      "The Intelligence with every tool",
       "Modules picked to fit your business",
+      "Your systems monitored daily",
     ],
   },
   {
-    name: "Operator",
-    tagline: "The console, plus the Intelligence",
+    name: "Guided",
+    tagline: "Installed with you, one on one",
     setup: "$3,500",
-    monthly: "$500",
+    monthly: "$299",
     featured: true,
     features: [
-      "Everything in Console",
-      "The Intelligence with all 40 tools",
-      "Inbox-extracted action items",
-      "Invoices drafted and tracked",
+      "Everything in Install",
+      "One-on-one setup sessions on your data",
+      "A personal walkthrough of every module",
+      "30 days of hands-on tuning",
       "Same-day support from the builder",
     ],
   },
   {
-    name: "Autopilot",
-    tagline: "Shaped entirely around you",
-    setup: "$6,500",
-    monthly: "$1,000",
+    name: "Partner",
+    tagline: "We run the whole install",
+    setup: "$6,000",
+    monthly: "$499",
     features: [
-      "Everything in Operator",
+      "Everything in Guided",
+      "Onboarding run end-to-end for you",
       "Custom modules built for your workflow",
       "Agents as they ship — first in line",
       "A quarterly working session with Caleb",

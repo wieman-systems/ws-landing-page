@@ -26,7 +26,7 @@ const INITIAL: Mod[] = [
   { name: "Clients", desc: "pipeline and next steps", on: true },
   { name: "Systems", desc: "uptime, headers, deploys", on: true },
   { name: "Builds", desc: "agent work in progress", on: false },
-  { name: "School", desc: "yes, really — see below", on: false },
+  { name: "School", desc: "a custom build of ours — see below", on: false },
 ];
 
 /**

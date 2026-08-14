@@ -23,6 +23,7 @@ export default function OsHero({ trialUrl, onBook }: OsHeroProps) {
   const ctaRef = useRef<HTMLDivElement>(null);
 
   return (
+    <>
     <section
       ref={heroRef}
       id="top"
@@ -167,15 +168,18 @@ export default function OsHero({ trialUrl, onBook }: OsHeroProps) {
         </div>
       </div>
 
-      {/* Credibility strip — the trust line the whole page rests on. Sits below
-          the grid band on an opaque surface so no lattice can run through it. */}
-      <div
-        style={{
-          position: "relative",
-          background: "var(--bg)",
-          borderTop: "1px solid var(--border-soft)",
-        }}
-      >
+    </section>
+
+    {/* Credibility strip — its own band BELOW the hero (outside the grid's
+        section entirely), so the text can never share space with a grid line.
+        The hero's fg border above it is the divider. */}
+    <div
+      style={{
+        position: "relative",
+        background: "var(--bg)",
+        borderBottom: "1px solid var(--border-soft)",
+      }}
+    >
         <div
           className="ws-wrap"
           style={{
@@ -202,7 +206,7 @@ export default function OsHero({ trialUrl, onBook }: OsHeroProps) {
             className="hide-mobile"
           />
         </div>
-      </div>
-    </section>
+    </div>
+    </>
   );
 }

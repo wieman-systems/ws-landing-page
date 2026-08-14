@@ -10,9 +10,9 @@ import MagneticLink from "../MagneticLink";
 const SECTION_MASK =
   "linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent)";
 
-// PRICING PLACEHOLDER — Caleb confirms before go-live.
-// Direction (2026-08-12): ~$2k install anchor, higher tiers sell the
-// one-on-one setup + tutorial time, on the studio's build-then-monthly model.
+// Founding pricing — confirmed 2026-08-13.
+// Install $2,000 + $199/mo · Guided $3,500 + $299/mo · Partner $6,000 + $499/mo,
+// on the studio's build-then-monthly model.
 const TIERS = [
   {
     name: "Install",

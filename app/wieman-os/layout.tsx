@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   },
 };
 
-// Product structured data. Deliberately no `offers`: the visible prices are
-// founding placeholders until Caleb confirms them, and structured data should
-// never assert a price the business hasn't committed to.
+// Product structured data. Founding pricing — confirmed 2026-08-13. Still
+// deliberately no `offers`: asserting prices in structured data is a separate
+// commitment (search engines surface and cache them) Caleb hasn't made.
 const PRODUCT_JSONLD = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",

@@ -47,9 +47,12 @@ export default function OsHero({ trialUrl, onBook }: OsHeroProps) {
           flexDirection: "column",
         }}
       >
+        {/* The skyline ends 20px ABOVE the strip — clear ground between the
+            lowest grid line and the strip's border, so the strip reads as
+            sitting under the grid, never laid over its bottom edge. */}
         <InteractiveBrandGrid
           tone="primary"
-          height="100%"
+          height="calc(100% - 20px)"
           opacity={1}
           unit={20}
           offsetX={0}

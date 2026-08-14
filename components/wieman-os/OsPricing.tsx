@@ -66,7 +66,8 @@ interface OsPricingProps {
 export default function OsPricing({ trialUrl }: OsPricingProps) {
   return (
     <section
-      style={{ position: "relative", borderTop: "1px solid var(--fg)", overflow: "hidden" }}
+      id="pricing"
+      style={{ position: "relative", borderTop: "1px solid var(--fg)", overflow: "hidden", scrollMarginTop: 74 }}
     >
       <BlueprintGrid
         opacity={0.05}
